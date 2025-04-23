@@ -88,12 +88,10 @@ const config = {
             label: "Docs",
           },
           {
-            type: "docSidebar",
-            sidebarId: "apirefSidebar",
+            href: "/reference",
             position: "left",
             label: "API Reference",
           },
-
           {
             href: "https://github.com/theananta/chitti-docs",
             label: "GitHub",
@@ -102,7 +100,7 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
+        style: "light",
         links: [
           {
             title: "Docs",
