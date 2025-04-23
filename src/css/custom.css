@@ -9,7 +9,8 @@
   font-family: Poppins, sans-serif;
   --ifm-color-primary: #f27f0c;
   --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darker: #f27f0c;
+  --ifm-color-primary-on-darker: #053f5c;
   --ifm-color-primary-darkest: #205d3b;
   --ifm-color-primary-light: #f7ad19;
   --ifm-color-primary-lighter: #f7ad19;
@@ -20,9 +21,10 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  --ifm-color-primary: #053f5c;
+  --ifm-color-primary: #f7ad19;
   --ifm-color-primary-dark: #f27f0c;
-  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darker: #053f5c;
+  --ifm-color-primary-on-darker: #fff;
   --ifm-color-primary-darkest: #1a8870;
   --ifm-color-primary-light: #29d5b0;
   --ifm-color-primary-lighter: #32d8b4;
