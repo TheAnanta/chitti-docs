@@ -85,7 +85,13 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "API References",
+            label: "Docs",
+          },
+          {
+            type: "docSidebar",
+            sidebarId: "apirefSidebar",
+            position: "left",
+            label: "API Reference",
           },
 
           {
@@ -102,8 +108,12 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
+                label: "Docs",
                 to: "/docs/intro",
+              },
+              {
+                label: "API Reference",
+                to: "/reference",
               },
             ],
           },
