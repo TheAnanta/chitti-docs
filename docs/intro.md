@@ -37,7 +37,7 @@ In the context of CHITTI., the landing webpage serves as the source of informati
 **Platform:** GitHub Pages\
 **URL:** The webpage can be accessed at [`scorewithchitti.in`](https://scorewithchitti.in).
 
-Detailed architectural overview about the landing webpage can be found [here](/docs/landing/overview).
+<!-- Detailed architectural overview about the landing webpage can be found [here](/docs/landing/overview). -->
 
 ### Client application
 
@@ -106,17 +106,17 @@ Detailed architectural overview about the landing webpage can be found [here](/d
 
 ## References
 
-<span id="references-1">1. The Tailwind name and logos are trademarks of Tailwind Labs Inc.</span>\
+<span id="references-1">1. The Tailwind name and logos are trademarks of Tailwind Labs Inc.</span><br/><br/>
 
-<span id="references-2">2. The "Flutter" name and logo are trademarks owned by Google.</span>\
+<span id="references-2">2. The "Flutter" name and logo are trademarks owned by Google.</span><br/><br/>
 
-<span id="references-3">3. The "Firebase" name and logo are trademarks owned by Google.</span>\
+<span id="references-3">3. The "Firebase" name and logo are trademarks owned by Google.</span><br/><br/>
 
-<span id="references-4">4. The Next.js trademark includes the Next.js name & logo, and any word, phrase, image, or other designation that identifies any Vercel products.</span>\
+<span id="references-4">4. The Next.js trademark includes the Next.js name & logo, and any word, phrase, image, or other designation that identifies any Vercel products.</span><br/><br/>
 
 <span id="references-5">5. Node.Js and Express are projects of the OpenJS Foundation. This is a statement of the OpenJS Foundation’s trademarks and its policy and guidelines relating to use of
-trademarks owned by the OpenJS Foundation and used by projects under the OpenJS Foundation.</span>\
+trademarks owned by the OpenJS Foundation and used by projects under the OpenJS Foundation.</span><br/><br/>
 
-<span id="references-6">6. Postgres, PostgreSQL and the Slonik Logo are trademarks or registered trademarks of the PostgreSQL Community Association of Canada.</span>\
+<span id="references-6">6. Postgres, PostgreSQL and the Slonik Logo are trademarks or registered trademarks of the PostgreSQL Community Association of Canada.</span><br/><br/>
 
-<span id="references-7">7. All Supabase trademarks, logos, or other brand elements can never be modified or used for any other purpose other than to represent Supabase Inc.</span>
+<span id="references-7">7. All Supabase trademarks, logos, or other brand elements can never be modified or used for any other purpose other than to represent Supabase Inc.</span><br/><br/>
