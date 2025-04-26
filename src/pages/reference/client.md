@@ -192,4 +192,31 @@ All routes under `/admin` require admin authentication.
 **Method**: POST\
 **Description**: Handles Razorpay webhook events, such as payment capture. Updates the user's subscription status and course access upon successful payment.
 
+## Parameters Table
 
+| Parameter Name | Location | Description                                                                         |
+| -------------- | -------- | ----------------------------------------------------------------------------------- |
+| `courseId`     | Path     | The unique identifier of the _course_ for retrieving course/topic/resource details. |
+| `unitId`       | Path     | The unique identifier of the _unit_ for retrieving topics.                          |
+| `topicId`      | Path     | The unique identifier of the _topic_ for retrieving resources by type.              |
+
+## Request Body Table
+
+| Field Name   | Type   | Description                                        |
+| ------------ | ------ | -------------------------------------------------- |
+| `rollNo`     | String | User's _roll number_ for authentication.           |
+| `pass`       | String | User's _password_ for authentication.              |
+| `deviceId`   | String | The device ID used for _device_ verification.      |
+| `name`       | String | User's _name_ for registration.                    |
+| `semester`   | Number | User's current _semester_ for registration.        |
+| `courses`    | Array  | List of _course IDs_ for registration.             |
+| `schedule`   | String | User's _schedule_ information for registration.    |
+| `subId`      | Number | _Subscription ID_ for registration.                |
+| `resourceId` | String | The identifier of the completed _resource_ to add. |
+| `userId`     | String | User's Id for Razorpay _payment creation_.           |
+| `courseId`   | String | The Course ID to which the user is _subscribing_.  |
+| `amount`     | Number | The _amount_ for the Razorpay order.               |
+| `receipt`    | String | _Receipt_ for the Razorpay order.                  |
+| `orderId`    | String | Razorpay Order ID to _Verify Payment_.             |
+| `paymentId`  | String | Razorpay Payment ID to _Verify Payment_.           |
+| `signature`  | String | Razorpay signature to _Verify Payment_.            |
