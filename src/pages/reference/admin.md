@@ -1,6 +1,6 @@
-# Admin APIs for Course Content Management
+# Admin Panel APIs
 
-This document provides a comprehensive overview of the APIs designed for administrators to manage course content.
+This document provides a comprehensive overview of the APIs designed for admin panel for CHITTI.
 
 ## Course Retrieval
 
