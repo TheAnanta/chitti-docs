@@ -1,15 +1,19 @@
-# Client APIs
+# Student App APIs
+
+This documentation provides an overview of the functionalities for APIs related to the Student Application.
 
 ## Authentication
 
-### Dashboard API
+### Dashboard
 
 **Method**: GET\
-**Parameters**:
+**Parameters**:\
+**Description**:
 
 ## Course Content
 
-### Get Topics By Id API
+### Get Topics By Id
 
 **Method**: GET\
-**Parameters**:
+**Parameters**:\
+**Description**:
