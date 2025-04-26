@@ -8,6 +8,7 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "rollNo": ,
@@ -15,12 +16,14 @@ This documentation provides an overview of the functionalities for APIs related 
   "deviceId":
 }
 ```
-**Description**: Authenticates a user and returns a Firebase custom token.  Checks if the roll number exists, validates credentials, and handles device ID verification.
+
+**Description**: Authenticates a user and returns a Firebase custom token. Checks if the roll number exists, validates credentials, and handles device ID verification.
 
 ### Reauthenticate
 
 **Method**: POST\
 **Headers**:
+
 - `Authorization`: Bearer "token"
 
 **Description**: Re-authenticates a user using an existing Firebase ID token and returns a new token.
@@ -29,17 +32,20 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "rollNo":
 }
 ```
+
 **Description**: Revokes a user's device ID, preventing them from logging in on that device.
 
 ### Signup
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "rollNo": ,
@@ -52,15 +58,18 @@ This documentation provides an overview of the functionalities for APIs related 
   "deviceId":
 }
 ```
+
 **Description**: Creates a new user account and returns student details along with a Firebase custom token.
 
 ### Dashboard
 
 **Method**: GET\
 **Path Parameters**:
-- `deviceId` 
+
+- `deviceId`
 
 **Headers**:
+
 - `Authorization`: Bearer "token"
 
 **Description**: Retrieves the user's dashboard information, including semester, completed resources, and course details.
@@ -69,12 +78,15 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "resourceId":
 }
 ```
+
 **Headers**:
+
 - `Authorization`: Bearer "token"
 
 **Description**: Adds a resource to the user's list of completed resources.
@@ -83,7 +95,8 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: GET\
 **Path Parameters**:
-- `cid`
+
+- `courseId`
 
 **Description**: Retrieves detailed information about a specific course, including its units.
 
@@ -91,10 +104,12 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: GET\
 **Path Parameters**:
-- `cid`
-- `uid`
+
+- `courseId`
+- `unitId`
 
 **Headers**:
+
 - `Authorization`: Bearer "token"
 
 **Description**: Retrieves the topic for a given unit within a course.
@@ -103,15 +118,17 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: GET\
 **Path Parameters**:
-- `cid`
-- `uid`
-- `tid`
+
+- `courseId`
+- `unitId`
+- `topicId`
 - `resourceId`
 
 **Headers**:
+
 - `Authorization`: Bearer "token"
 
-**Description**: Retrieves resources of a specific type (notes, cheatsheets, videos, importantQuestions) for a given topic within a unit and course.  If `resourceId` is "all", it retrieves all resource types.
+**Description**: Retrieves resources of a specific type (notes, cheatsheets, videos, importantQuestions) for a given topic within a unit and course. If `resourceId` is "all", it retrieves all resource types.
 
 ## Admin APIs
 
@@ -119,12 +136,14 @@ This documentation provides an overview of the functionalities for APIs related 
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "rollNo": ,
   "pass":
 }
 ```
+
 **Description**: Authenticates an admin user and returns a Firebase custom token.
 
 ### Admin Router
@@ -133,7 +152,7 @@ All routes under `/admin` require admin authentication.
 
 **Middleware**: `checkAdminAuth`
 
-**Description**: This router handles administrative tasks related to course content management.  Refer to `admin-router.ts` for specific endpoints and functionalities.
+**Description**: This router handles administrative tasks related to course content management. Refer to `admin-router.ts` for specific endpoints and functionalities.
 
 ## Razorpay Integration
 
@@ -141,6 +160,7 @@ All routes under `/admin` require admin authentication.
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "userId": ,
@@ -149,12 +169,14 @@ All routes under `/admin` require admin authentication.
   "receipt":
 }
 ```
+
 **Description**: Creates a Razorpay order for a given user and course.
 
 ### Verify Signature
 
 **Method**: POST\
 **Request Body**:
+
 ```json
 {
   "orderId": ,
@@ -162,10 +184,12 @@ All routes under `/admin` require admin authentication.
   "signature":
 }
 ```
+
 **Description**: Verifies the Razorpay signature for a payment.
 
 ### Webhook
 
 **Method**: POST\
-**Description**: Handles Razorpay webhook events, such as payment capture.  Updates the user's subscription status and course access upon successful payment.
+**Description**: Handles Razorpay webhook events, such as payment capture. Updates the user's subscription status and course access upon successful payment.
+
 
