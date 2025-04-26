@@ -27,6 +27,23 @@ Few endpoints are secured with the token based authentication provided by Fireba
 2. **Supabase [<sup>4</sup>](#references-4)**\
    The SQL offerring of the supabase is used to host the database for the entire application which is connected using the pooling and connection url using Prisma as the ORM.
 
+## Setup
+
+The entry point to the code is available at **`functions/src/index.ts`**.\
+The prisma schema is available at `functions/prisma/prisma.schema`.
+
+### Repository
+
+URL: https://github.com/theananta/chitti-server
+
+### Steps to run
+
+To run the client application:
+
+1. Clone the repository.
+2. Run `npm run serve` to emulate the Firebase Functions locally.
+3. Run `npm run deploy` to deploy the project to the Firebase SDK, which interally run `npm run lint` before deploying.
+
 ## Next Steps
 
 To know more about database schemas/models, checkout the schema references available [**here**](database-schema).

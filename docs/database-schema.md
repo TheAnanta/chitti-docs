@@ -4,6 +4,25 @@
 
 Prisma ORM is used to manipulate the data and the database schema in both the development and production environments that each link a seperate PostgreSQL instance.
 
+## Setup
+
+The entry point to the schema is available at **`functions/prisma/prisma.schema`**.
+
+### Repository
+
+URL: https://github.com/theananta/chitti-server
+
+### Steps to run
+
+To run the client application:
+
+1. Clone the repository.
+2. Run `docker run --name chitti -e POSTGRES_PASSWORD=robo -d -p 5432:5432 postgres` in your preferred terminal.
+3. Append the following line to the .env (development environment) :
+   `DATABASE_URL="postgresql://postgres:robo@localhost:5432/chitti?schema=public"`
+4. Run `npx prisma migrate dev --name {name_of_migration}` to build the database schema in the postgreSQL instance running on docker.
+5. Run `npx prisma generate` to generate the prisma client locally.
+
 ## Models
 
 ### Visual Representation

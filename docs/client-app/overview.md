@@ -39,6 +39,22 @@ The client application is available to the public for the following platforms:
 
 Assuming the usage of the client application to be high and predicting the behaviour of application users, we identify a heavy requirement for well-architected modelling to handle the high surge in data and request to the server. Thus the application makes well use of the clean architectural principles and components which will be discussed in the next page.
 
+## Setup
+
+The entry point to the code is available at **`lib/main.dart`**.
+
+### Repository
+
+URL: https://github.com/theananta/chitti-app
+
+### Steps to run
+
+To run the client application:
+
+1. Clone the repository.
+2. Run `flutter devices` to list available devices to run the application on.
+3. Run `flutter run -d {device-identifier}`.
+
 ## References
 
 <span id="references-1">1. The "Flutter" name and logo are trademarks owned by Google.</span><br/><br/>

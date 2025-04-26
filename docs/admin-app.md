@@ -22,6 +22,22 @@ Every route and operation is secured with **token-based authentication**.
 **Platform:** Vercel\
 **URL**: The admin panel can be accessed at [`admin.scorewithchitti.in`](https://admin.scorewithchitti.in).
 
+## Setup
+
+The entry point to the code is available at **`/src/app/page.tsx`**.
+
+### Repository
+
+URL: https://github.com/ManasMalla/chitti-admin
+
+### Steps to run
+
+To run the client application:
+
+1. Clone the repository.
+2. Run `npm run dev` to run the development server locally
+3. Run `npm run build` to build the application locally.
+
 ## Architecture
 
 ### Functions

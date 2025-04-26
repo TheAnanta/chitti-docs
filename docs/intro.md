@@ -37,6 +37,21 @@ In the context of CHITTI., the landing webpage serves as the source of informati
 **Platform:** GitHub Pages\
 **URL:** The webpage can be accessed at [`scorewithchitti.in`](https://scorewithchitti.in).
 
+## Setup
+
+The entry point to the code is available at **`index.html`**.
+
+### Repository
+
+URL: https://github.com/theananta/chitti-landing
+
+### Steps to run
+
+To run the client application:
+
+1. Clone the repository.
+2. Open the index.html file.
+
 <!-- Detailed architectural overview about the landing webpage can be found [here](/docs/landing/overview). -->
 
 ### Client application
