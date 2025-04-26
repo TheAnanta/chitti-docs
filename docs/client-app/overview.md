@@ -32,9 +32,15 @@ The client application is available to the public for the following platforms:
 
 ## Technology Stack
 
-1. Flutter [<sup>2</sup>](#references-2)
-2. Firebase [<sup>3</sup>](#references-3)
+1. Flutter [<sup>1</sup>](#references-1)
+2. Firebase [<sup>2</sup>](#references-2)
 
 ## Architecture
 
 Assuming the usage of the client application to be high and predicting the behaviour of application users, we identify a heavy requirement for well-architected modelling to handle the high surge in data and request to the server. Thus the application makes well use of the clean architectural principles and components which will be discussed in the next page.
+
+## References
+
+<span id="references-1">1. The "Flutter" name and logo are trademarks owned by Google.</span><br/><br/>
+
+<span id="references-2">2. The "Firebase" name and logo are trademarks owned by Google.</span><br/><br/>

@@ -102,7 +102,7 @@ Every route and operation is secured with **token-based authentication**.
 **Platform:** Vercel\
 **URL**: The admin panel can be accessed at [`admin.scorewithchitti.in`](https://admin.scorewithchitti.in).
 
-Detailed architectural overview about the landing webpage can be found [here](/docs/admin-app/overview).
+Detailed architectural overview about the admin application can be found [here](/docs/admin-app/overview).
 
 ## References
 

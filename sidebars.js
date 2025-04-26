@@ -30,19 +30,18 @@ const sidebars = {
       ],
     },
     {
-      type: "category",
+      type: "doc",
       label: "Admin App",
-      items: [
-        { type: "doc", label: "Overview", id: "admin-app/overview" },
-        // { type: "doc", label: "Architecture", id: "admin-app/architecture" },
-        // { type: "doc", label: "User flow", id: "admin-app/userflow" },
-      ],
+      id: "admin-app",
     },
     {
       type: "doc",
       label: "Serverlet",
       id: "serverlet",
     },
+
+    { type: "doc", label: "Databases", id: "database-schema" },
+    { type: "doc", label: "Security", id: "security" },
   ],
 
   // But you can create a sidebar manually

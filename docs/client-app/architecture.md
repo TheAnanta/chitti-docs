@@ -102,3 +102,9 @@ The primary pages of CHITTI. are follows:
 7. PDF Viewer Page
 8. Video Player Page
 9. Profile Page
+
+## References
+
+<span id="references-1">1. The "Flutter" name and logo are trademarks owned by Google.</span><br/><br/>
+
+<span id="references-2">2. The "Dart" name and logo are trademarks owned by Google.</span><br/><br/>
