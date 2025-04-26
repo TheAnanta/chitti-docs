@@ -389,3 +389,35 @@ This document provides a comprehensive overview of the APIs designed for admin p
 ```
 
 **Description**: Updates the difficulty level of a specific topic.
+
+## Parameters Table
+
+| Parameter Name   | Location | Description                                                                |
+| ---------------- | -------- | -------------------------------------------------------------------------- |
+| `courseCategory` | Query    | Filters courses by _category_. Defaults to "program-core" if not provided. |
+| `courseId`       | Path     | The unique identifier of the _course_ within a category.                   |
+| `unitId`         | Path     | The unique identifier of the _unit_ within a course.                       |
+| `topicId`        | Path     | The unique identifier of the _topic_ within a unit.                        |
+| `cheatId`        | Path     | The unique identifier of the _cheatsheet_ resource.                        |
+| `notesId`        | Path     | The unique identifier of the _notes_ resource.                             |
+| `videoId`        | Path     | The unique identifier of the _video_ resource.                             |
+| `iqId`           | Path     | The unique identifier of the _important question_ resource.                |
+| `resourceId`     | Path     | Type of _resource_ (notes, cheatsheets, videos, important questions).      |
+
+## Request Body Table
+
+| Field Name       | Type   | Description                                                                  |
+| ---------------- | ------ | ---------------------------------------------------------------------------- |
+| `courseId`       | String | The unique identifier of the _course_.                                       |
+| `courseCategory` | String | The _category_ of the course.                                                |
+| `title`          | String | The _title_ of the course.                                                   |
+| `description`    | String | The description of the _course_.                                             |
+| `image`          | String | The URL of the course _image_.                                               |
+| `unitNo`         | Number | The _number of the unit_ within the course.                                  |
+| `unitName`       | String | The name of the _unit_.                                                      |
+| `description`    | String | The description of the _unit_.                                               |
+| `difficulty`     | String | The _difficulty level_ of the unit.                                          |
+| `name`           | String | The name of the _topic_.                                                     |
+| `url`            | String | The URL of the _resource_ (notes, cheatsheets, videos, important questions). |
+| `thumbnail`      | String | The URL of the _video thumbnail_.                                            |
+| `difficulty`     | String | The difficulty level of the _topic_.                                         |
