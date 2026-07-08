@@ -6,9 +6,49 @@ The CHITTI. client application is built with the Flutter SDK following the clean
 
 The **Flutter SDK** [<sup>1</sup>](#references-1) is a comprehensive framework that aids in building beautiful, native-like cross-platform applications from a single codebase with the help of the Flutter Engine which renders content over native applications as a fragment, making use of the rich performance and optimization delivered by the **Dart** [<sup>2</sup>](#references-2) programming language.
 
+## Modules
+
+Every module within CHITTI is specificially architected to make sure each module follows the principle of least coupling, i.e, stays independant of each other, but works together like a monolithic structure without the need for publisher/subscriber architecture.
+
+We also make sure to comply with the principle of highest cohesion, i.e, modules should comprise a collection of code that acts as a system. They should have clearly defined responsibilities and stay within boundaries of certain domain knowledge.
+
+The CHITTI application is primarily divided into the follow major modules:
+
+### core
+
+1. `core/constants`:
+2. `core/di`:
+3. `core/error`:
+4. `core/navigation`:
+5. `core/network`:
+6. `core/theme`:
+7. `core/utils`:
+
+### features:
+
+1. `feature/activity`:
+2. `feature/app`:
+3. `feature/auth`:
+4. `feature/chat`:
+5. `feature/commerce`:
+6. `feature/community`:
+7. `feature/courses`:
+8. `feature/home`:
+9. `feature/notifications`:
+10. `feature/student`:
+11. `feature/support`:
+
+### shared
+
+1. `shared/extensions`:
+2. `shared/utils`:
+3. `shared/widgets`:
+
+### utils
+
 ## Components
 
-The components of the client application can be primary divided into 3 layers: data, domain and presentation layer.
+The components of the every module within the client application can be primary divided into 3 layers: data, domain and presentation layer.
 
 • **The data layer** deals with data and operations related to maintaining the application data. The data layer includes datasources, implementation of repositories and model with their functions.
 

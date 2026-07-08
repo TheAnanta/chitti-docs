@@ -10,8 +10,8 @@ The application allows users to sign in with their organizational learning manag
 
 The client application is available to the public for the following platforms:
 
-- [Android](https://github.com/TheAnanta/chitti-app/releases/download/1.0.1/score-with-chitti-app.apk)
-- iOS (Coming soon)
+- [Android](https://play.google.com/store/apps/details?id=dev.theananta.chitti)
+- [iOS](https://apps.apple.com/in/app/chitti/id6761459926)
 - [Windows](https://github.com/TheAnanta/chitti-app/releases/download/1.0.1/chitti.exe)
 - [macOS](https://github.com/TheAnanta/chitti-app/releases/download/1.0.1/chitti-macos.zip)
 
@@ -33,7 +33,7 @@ The client application is available to the public for the following platforms:
 ## Technology Stack
 
 1. Flutter [<sup>1</sup>](#references-1)
-2. Firebase [<sup>2</sup>](#references-2)
+2. Google Cloud [<sup>2</sup>](#references-2)
 
 ## Architecture
 
