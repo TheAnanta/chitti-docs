@@ -2,23 +2,48 @@
 
 ## Overview
 
-Models are the digital implementation of real-world objects. They include properties and methods that help identify the object and define boundaries around which/how the object can be handled. The CHITTI. application makes use of the following models throughout the scope of the application:
+Models are the digital implementation of real-world objects. They include
+properties and methods that help identify the object and define boundaries
+around which/how the object can be handled. The CHITTI. application makes use of
+the following models throughout the scope of the application:
 
-1. [Semester](#semester)
-2. [Subject](#subject)
-3. [Unit](#unit)
-4. [UnitWithResources](#unitwithresources)
-5. [CompletedResources](#completedresources)
-6. [Roadmap](#roadmap)
-7. [RoadmapItem](#roadmapitem)
-8. [Cheatsheet](#cheatsheet)
-9. [Video](#video)
-10. [Notes](#notes)
-11. [Important Questions](#important-questions)
+1. [Activity](#activity)
+2. [Admin](#admin)
+3. [Editor](#editor)
+4. [Instructor](#instructor)
+5. [Staff](#staff)
+6. [Student](#student)
+7. [Chat](#chat)
+8. [ChatMessage](#chat-message)
+9. [Coupon](#coupon)
+10. [CourseCartItem](#course-cart-item)
+11. [Feedback](#feedback)
+12. [Offers](#offers)
+13. [Payment](#payment)
+14. [Reel](#reel)
+15. [Course](#course)
+16. [Enrollments](#enrollments)
+17. [Unit](#unit)
+18. [Topic](#topic)
+19. [Cheatsheet](#cheatsheet)
+20. [Video](#video)
+21. [Notes](#notes)
+22. [Important Questions](#important-questions)
+23. [Banner](#banner)
+24. [Notification](#notification)
+25. [Badge](#badge)
+26. [EnrolledCourse](#enrolled-course)
+27. [FAQ](#faq)
+28. [Ticket](#ticket)
+29. [TicketComment](#ticket-comment)
 
-These specific models are defined based on the bussiness model of CHITTI. and are static final classes that are implemented in the data layer to help set constraints on the various operations that can be performed on data of the particular type.
+These specific models are defined based on the bussiness model of CHITTI. and
+are static final classes that are implemented in the data layer to help set
+constraints on the various operations that can be performed on data of the
+particular type.
 
-The CHITTI. client application heavily relies on the above well-structed and well-defined rigid models to read, modify and update application data.
+The CHITTI. client application heavily relies on the above well-structed and
+well-defined rigid models to read, modify and update application data.
 
 ## Semester
 
@@ -34,22 +59,27 @@ Defines the current semester the student is enrolled in.
 
 **type:** `List<CompletedResources>`\
 **modifier:** final\
-A reference to the resources which have been visisted by the student in the application.
+A reference to the resources which have been visisted by the student in the
+application.
 
 #### `courses`
 
 **type:** `Map<String, List<Subject>>`\
 **modifier:** final\
-A list of all the subjects, grouped by their course category (eg. program-core) as the key in a key-value pair representation.
+A list of all the subjects, grouped by their course category (eg. program-core)
+as the key in a key-value pair representation.
 
 ### Methods
 
 #### `fromMap`
 
-A static helper function to reduce the JSON object provided into a semester object.
+A static helper function to reduce the JSON object provided into a semester
+object.
 
-1. It takes the data about the different subjects and converts to the `Subject` model using the helper function.
-2. It then converts the snapshot of completed resources to be parsed into the `CompletedResources` model.
+1. It takes the data about the different subjects and converts to the `Subject`
+   model using the helper function.
+2. It then converts the snapshot of completed resources to be parsed into the
+   `CompletedResources` model.
 3. It then computes the progress of the user.
 4. Return all the computed parameters parsed as a `Semester` object.
 
@@ -63,7 +93,8 @@ A static helper function to reduce the JSON object provided into a semester obje
 
 **type:** `String`\
 **modifier:** final\
-Unique identifier for the subject/course based on GITAM definition, eg. **CSEN2011, MATH2361**.
+Unique identifier for the subject/course based on GITAM definition, eg.
+**CSEN2011, MATH2361**.
 
 #### `courseCategory`
 
@@ -119,7 +150,8 @@ Converts a `Map<String, dynamic>` into a `Subject` object.
 
 #### `copyWithProgress`
 
-Returns a new copy of the `Subject` with an updated progress value, keeping other properties unchanged.
+Returns a new copy of the `Subject` with an updated progress value, keeping
+other properties unchanged.
 
 ---
 
@@ -386,9 +418,10 @@ URL pointing to the important question resource.
 
 ## Summary
 
-Each model is a final class in the data layer of the CHITTI. application.  
+Each model is a final class in the data layer of the CHITTI. application.\
 Their main purpose is to:
 
 1. Set strong typing constraints.
 2. Enable easy serialization/deserialization from the database.
-3. Provide structure for the app’s frontend to display and manipulate user data cleanly.
+3. Provide structure for the app’s frontend to display and manipulate user data
+   cleanly.
