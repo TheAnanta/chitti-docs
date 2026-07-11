@@ -62,11 +62,18 @@
   font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght,MONO@0,300..800,1;1,300..800,1&display=swap');
+
 *{
   font-family: 'Apercu Pro', 'Nexa-Regular' !important;
   letter-spacing: 1%;
   line-height: 220%;
 }
+
+code, kbd, pre, samp, .theme-code-block * {
+  font-family: 'Google Sans Code', 'Apercu Mono Pro', monospace !important;
+}
+
 :root {
   --ifm-color-primary: #f27f0c;
   --ifm-color-primary-dark: #29784c;
@@ -91,4 +98,111 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Table Styles - Android Developer Style */
+.markdown table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.markdown table thead tr {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.markdown table th {
+  font-weight: 600;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  padding: 12px 16px;
+}
+
+.markdown table td {
+  border: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 12px 16px;
+}
+
+.markdown table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Tabs Styling - Android Dev Docs Style */
+.tabs-container {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.tabs {
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300) !important;
+  background-color: transparent;
+  padding: 0 8px;
+  overflow-y: hidden !important;
+}
+
+.tabs__item {
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  margin-bottom: -1px !important;
+  padding: 12px 20px 6px !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  background-color: transparent !important;
+}
+
+.tabs__item:hover {
+  background-color: var(--ifm-color-emphasis-200) !important;
+}
+
+.tabs__item--active {
+  border-bottom: 2px solid var(--ifm-color-primary) !important;
+  background-color: transparent !important;
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600 !important;
+}
+
+[role="tabpanel"] {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background-color: transparent;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+}
+
+[role="tabpanel"] > div {
+  margin: 0 !important;
+}
+
+.tabs-container .margin-top--md {
+  margin-top: 0 !important;
+}
+
+[role="tabpanel"] .theme-code-block {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.api-tab-label {
+  text-align: center;
+  line-height: 1.2;
+}
+
+.api-tab-label span {
+  display: block;
+  font-size: 0.8em;
+  font-weight: normal;
+  opacity: 0.8;
+  margin-top: 2px;
 }

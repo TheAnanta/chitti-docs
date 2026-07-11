@@ -1,196 +1,647 @@
+import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem';
+
 # Student App APIs
 
-This documentation provides an overview of the functionalities for APIs related to the Student Application.
+This documentation provides an overview of the functionalities for APIs related
+to the Student Application.
 
-## General
+## Public APIs
 
-### Login
+### Health API
+
+**Method**: GET\
+**Path**: `/health`\
+**Description**: Verifies the health of the CHITTI. backend and acts as the
+primary source of verification if its an external failure of the backend as a
+monolothic layer is failing together.\
+**Response Code**: `200`\
+**Response Body**: `The backend is live 💓 - Chitti: Your last min prep buddy!!`
+
+## Authentication
+
+### Sign In
 
 **Method**: POST\
+**Path**: `/auth/sign-in`\
+**Description**: Authenticates a user and returns a Firebase custom token.
+Checks if the roll number exists, validates credentials, and handles device ID
+verification.\
+**Request Header**:
+
+```json
+{
+  "X-App-Version": "X.Y.Z",
+  "X-Device-Id": "string",
+  "X-FCM-Token": "string"
+}
+```
+
 **Request Body**:
 
 ```json
 {
-  "rollNo": ,
-  "pass": ,
-  "deviceId":
+  "roll_number": "string",
+  "password": "string"
 }
 ```
 
-**Description**: Authenticates a user and returns a Firebase custom token. Checks if the roll number exists, validates credentials, and handles device ID verification.
+**Response**:
 
-### Reauthenticate
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign in<span>200</span></div>} default>
+```json
+    {
+      "message": "Sign-in successful",
+      "token": "string",
+      "status": true,
+      "data": {
+        "name": "string"
+      }
+    }
+    ```
+
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Roll number is required",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
+
+</TabItem>
+  <TabItem value="403" label={<div className="api-tab-label">Another Device Exists<span>403</span></div>}>
+```json
+    {
+        "message": "Another device already exists, request for a revoke of your current device.",
+        "status": false,
+        "revokes_left": 3,
+        "reset_token": "eyJhY2NvdW50X3Rva2VuIjo...",
+        "error_code": "auth/device-exists"
+    }
+    ```
+    **JWT for `reset_token`**:
+
+    ```json
+    {
+      "user_id": "221203XXXX", 
+      "device_id_attempted": "new_device_uuid_9999",
+      "exp": 1789945200 
+    }
+    ```
+
+</TabItem>
+  <TabItem value="500" label={<div className="api-tab-label">Unexpected Error<span>500</span></div>}>
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
+
+### Sign in With OAuth (Google/Apple)
 
 **Method**: POST\
-**Headers**:
+**Path**: `/auth/oauth`\
+**Description**: Authenticates a user with an external oauth provider like
+Google or Apple and returns a Firebase custom token. Checks if the user exists,
+validates credentials, and handles device ID verification. It also replaces the
+deprecated internal-login API as this API also works with Admins, Instructors
+and Staff.\
+**Request Header**:
 
-- `Authorization`: Bearer "token"
+```json
+{
+  "X-App-Version": "X.Y.Z",
+  "X-Device-Id": "string",
+  "X-FCM-Token": "string"
+}
+```
 
-**Description**: Re-authenticates a user using an existing Firebase ID token and returns a new token.
+**Request Body**:
+
+```json
+{
+  "provider": "string",
+  "id_token": "string"
+}
+```
+
+**Response**:
+
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign in<span>200</span></div>} default>
+```json
+    {
+      "message": "Sign-in successful",
+      "token": "string",
+      "status": true,
+      "data": {
+        "name": "string"
+      }
+    }
+    ```
+
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "ID Token is required",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
+
+</TabItem>
+  <TabItem value="403" label={<div className="api-tab-label">Another Device Exists<span>403</span></div>}>
+```json
+    {
+        "message": "Another device already exists, request for a revoke of your current device.",
+        "status": false,
+        "revokes_left": 3,
+        "reset_token": "eyJhY2NvdW50X3Rva2VuIjo...",
+        "error_code": "auth/device-exists"
+    }
+    ```
+    **JWT for `reset_token`**:
+
+    ```json
+    {
+      "user_id": "221203XXXX", 
+      "device_id_attempted": "new_device_uuid_9999",
+      "exp": 1789945200 
+    }
+    ```
+
+</TabItem>
+<TabItem value="404" label={<div className="api-tab-label">User doesn't exist<span>404</span></div>}>
+```json
+    {
+      "message": "User hasn't been signed-up on our platform.",
+      "token":"string",
+      "status": false,
+      "error_code": "auth/user-not-found"
+    }
+    ```
+
+</TabItem>
+  <TabItem value="500" label={<div className="api-tab-label">Unexpected Error<span>500</span></div>}>
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
+
+### Sign Up
+
+**Method**: POST\
+**Path**: `/auth/sign-up`\
+**Description**: Creates a new user account and returns student details.\
+**Request Headers**:
+
+```json
+{
+  "X-App-Version": "X.Y.Z",
+  "X-Device-Id": "string",
+  "X-FCM-Token": "string",
+  "Authorization": "Bearer ey........"
+}
+```
+
+**Request Body**:
+
+```json
+{
+  "name": "string",
+  "semester": "string",
+  "branch": "string",
+  "organization": "string"
+}
+```
+
+**Response**:
+
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign up<span>200</span></div>} default>
+```json
+    {
+      "message": "Sign up successful",
+      "status": true,
+    }
+    ```
+
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Semester is required/Organization not supported yet.",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
+
+</TabItem>
+
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
+
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
 
 ### Revoke Device ID
 
-**Method**: POST\
+**Method**: PATCH\
+**Path**: `/auth/device/reset`\
+**Description**: Revokes a user's device ID, preventing them from logging in on
+that device.\
+**Request Headers**:
+
+```json
+{
+  "X-App-Version": "X.Y.Z"
+}
+```
+
 **Request Body**:
 
 ```json
 {
-  "rollNo":
+  "reset_token": "eyJhY2NvdW50X3Rva2VuIjo..."
 }
 ```
 
-**Description**: Revokes a user's device ID, preventing them from logging in on that device.
+**Response**:
 
-### Signup
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign up<span>200</span></div>} default>
+```json
+    {
+      "message": "XYZ's device ID has been revoked.",
+      "status": true,
+    }
+    ```
+
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Malformed payload",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
+
+</TabItem>
+<TabItem value="403" label={<div className="api-tab-label">Revokes Exhausted<span>403</span></div>}>
+```json
+    {
+      "message": "No revokes left. Please request for a revoke.",
+      "status": false,
+      "error_code": "auth/revokes-exhausted"
+    }
+    ```
+
+</TabItem>
+ <TabItem value="404" label={<div className="api-tab-label">User Not Found<span>404</span></div>}>
+```json
+    {
+      "message": "User not found.",
+      "status": false,
+      "error_code": "auth/user-not-found"
+    }
+    ```
+
+</TabItem>
+
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
+
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
+
+### Request Revoke Device ID
 
 **Method**: POST\
+**Path**: `/auth/device-revokes`\
+**Description**: Request the user's for a specific reason for requesting the
+revoke to a new device ID.\
+**Request Headers**:
+
+```json
+{
+  "X-App-Version": "X.Y.Z"
+}
+```
+
 **Request Body**:
 
 ```json
 {
-  "rollNo": ,
-  "pass": ,
-  "name": ,
-  "semester": ,
-  "courses": ,
-  "schedule": ,
-  "subId": ,
-  "deviceId":
+  "reset_token": "eyJhY2NvdW50X3Rva2VuIjo...",
+  "reason": "string"
 }
 ```
 
-**Description**: Creates a new user account and returns student details along with a Firebase custom token.
+**Response**:
 
-### Dashboard
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign up<span>200</span></div>} default>
+```json
+    {
+      "message": "Your request to revoke your device has been submitted successfully",
+      "status": true,
+    }
+    ```
+
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Reason is required",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
+
+</TabItem>
+
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
+
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
+
+### Fetch Profile
 
 **Method**: GET\
-**Path Parameters**:
+**Path**: `/auth/profile/:role`\
+**Description**: Fetch the user profile for the specific role specified.\
+**Path Params**:\
+`role`: The role for which the profile is requested, i.e, ADMIN, STAFF,
+INSTRUCTOR, or STUDENT.\
+**Request Headers**:
 
-- `deviceId`
+```json
+{
+  "X-App-Version": "X.Y.Z",
+  "Authorization": "Bearer ey..."
+}
+```
 
-**Headers**:
+**Response**:
 
-- `Authorization`: Bearer "token"
+<Tabs>
+  <TabItem value="200-I" label={<div className="api-tab-label">Instructor Profile<span>200</span></div>} default>
+```json
+    {
+      "message": "Profile fetched successfully",
+      "status": true,
+      "data": {
+        "roll_number": "string",
+        "username": "string",
+        "bio": "string",
+        "assigned_courses": [
+          {
+            "instructor_id": "string",
+            "course_id": "string",
+            "roles": "string",
+            "is_lead": true
+          }
+        ],
+        "email": "string",
+        "name": "string",
+        "semester": 7,
+        "branch": null,
+        "gpa": null,
+        "sgpa": null,
+        "image": "string",
+        "user_role": ["INSTRUCTOR"]
+      }
+    }
+    ```
 
-**Description**: Retrieves the user's dashboard information, including semester, completed resources, and course details.
+</TabItem>
+<TabItem value="200" label={<div className="api-tab-label">Profile Fetched<span>200</span></div>}>
+```json
+    {
+      "message": "Profile fetched successfully",
+      "status": true,
+      "data": {
+        "roll_number": "string",
+        "username": "string",
+        "email": "string",
+        "name": "string",
+        "semester": 7,
+        "branch": null,
+        "gpa": null,
+        "sgpa": null,
+        "image": "string",
+        "user_role": ["STUDENT"]
+      }
+    }
+    ```
 
-### Add Completed Resource
+</TabItem>
+  <TabItem value="403" label={<div className="api-tab-label">Mismatched role for user<span>403</span></div>}>
+```json
+    {
+        "message": "Student is not a ....",
+        "status": false,
+        "error_code": "auth/unauthorized"
+    }
+    ```
 
-**Method**: POST\
+</TabItem>
+<TabItem value="404" label={<div className="api-tab-label">User doesn't exist<span>404</span></div>}>
+```json
+    {
+      "message": "User not found",
+      "status": false,
+      "error_code": "auth/user-not-found"
+    }
+    ```
+
+</TabItem>
+
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
+
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
+
+</TabItem>
+</Tabs>
+
+### Edit Profile
+
+**Method**: PATCH\
+**Path**: `/auth/profile`\
+**Description**: Edit the user's profile, especially, their name, profile
+picture, organization, branch, semester, or bio.\
+**Request Headers**:
+
+```json
+{
+  "X-App-Version": "X.Y.Z",
+  "Authorization": "Bearer ey..."
+}
+```
+
 **Request Body**:
 
 ```json
 {
-  "resourceId":
+  "name": "string",
+  "image_url": "string",
+  "bio": "string",
+  "organization": "string",
+  "branch": "string",
+  "semester": 7
 }
 ```
 
-**Headers**:
+**Response**:
 
-- `Authorization`: Bearer "token"
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign up<span>200</span></div>} default>
+```json
+    {
+      "message": "Profile updated successfully",
+      "status": true,
+    }
+    ```
 
-**Description**: Adds a resource to the user's list of completed resources.
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Image URL is required./Organization not supported",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
 
-### Get Course Details
+</TabItem>
 
-**Method**: GET\
-**Path Parameters**:
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
 
-- `courseId`
+```json
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
 
-**Description**: Retrieves detailed information about a specific course, including its units.
+</TabItem>
+</Tabs>
 
-### Get Topic
-
-**Method**: GET\
-**Path Parameters**:
-
-- `courseId`
-- `unitId`
-
-**Headers**:
-
-- `Authorization`: Bearer "token"
-
-**Description**: Retrieves the topic for a given unit within a course.
-
-### Get Resources by Type
-
-**Method**: GET\
-**Path Parameters**:
-
-- `courseId`
-- `unitId`
-- `topicId`
-- `resourceId`
-
-**Headers**:
-
-- `Authorization`: Bearer "token"
-
-**Description**: Retrieves resources of a specific type (notes, cheatsheets, videos, importantQuestions) for a given topic within a unit and course. If `resourceId` is "all", it retrieves all resource types.
-
-## Admin APIs
-
-### Admin Login
+### [ADMIN] Fetch Token
 
 **Method**: POST\
-**Request Body**:
+**Path**: `/auth/token-exchange/:user_id`\
+**Description**: Exchange a Firebase ID token for the given user ID. Should be
+only used by admins for token exchange.\
+**Path Params**:\
+`user_id`: The user id to generate the Firebase ID token
+
+**Request Headers**:
 
 ```json
 {
-  "rollNo": ,
-  "pass":
+  "X-App-Version": "X.Y.Z",
+  "X-Internal-Secret": "ey...."
 }
 ```
 
-**Description**: Authenticates an admin user and returns a Firebase custom token.
+**Response**:
 
-### Admin Router
+<Tabs>
+  <TabItem value="200" label={<div className="api-tab-label">Successful Sign up<span>200</span></div>} default>
+```json
+    {
+      "message": "Fetched Firebase ID token successfully",
+      "status": true,
+      "token": "ey..."
+    }
+    ```
 
-All routes under `/admin` require admin authentication.
+</TabItem>
+  <TabItem value="400" label={<div className="api-tab-label">Invalid request<span>400</span></div>}>
+```json
+    {
+      "message": "Misformed payload",
+      "status": false,
+      "error_code": "payload/misformed-payload"
+    }
+    ```
 
-**Middleware**: `checkAdminAuth`
+</TabItem>
+<TabItem value="403" label={<div className="api-tab-label">Unauthorized<span>403</span></div>}>
+```json
+    {
+      "message": "Unauthorized",
+      "status": false,
+      "error_code": "auth/unauthorized"
+    }
+    ```
 
-**Description**: This router handles administrative tasks related to course content management. Refer to `admin-router.ts` for specific endpoints and functionalities.
+</TabItem>
 
-## Razorpay Integration
-
-### Create Order
-
-**Method**: POST\
-**Request Body**:
+<TabItem value="500" label={<div className="api-tab-label">Unexpected
+Error<span>500</span></div>}>
 
 ```json
-{
-  "userId": ,
-  "courseId": ,
-  "amount": ,
-  "receipt":
-}
-```
+    {
+      "message": "Internal Server Error. Actual cause of the error",
+      "status": false,
+      "error_code": "auth/internal-error"
+    }
+    ```
 
-**Description**: Creates a Razorpay order for a given user and course.
+</TabItem>
+</Tabs>
 
-### Verify Signature
-
-**Method**: POST\
-**Request Body**:
-
-```json
-{
-  "orderId": ,
-  "paymentId": ,
-  "signature":
-}
-```
-
-**Description**: Verifies the Razorpay signature for a payment.
-
-### Webhook
-
-**Method**: POST\
-**Description**: Handles Razorpay webhook events, such as payment capture. Updates the user's subscription status and course access upon successful payment.
 
 ## Parameters Table
 
@@ -213,10 +664,11 @@ All routes under `/admin` require admin authentication.
 | `schedule`   | String | User's _schedule_ information for registration.    |
 | `subId`      | Number | _Subscription ID_ for registration.                |
 | `resourceId` | String | The identifier of the completed _resource_ to add. |
-| `userId`     | String | User's Id for Razorpay _payment creation_.           |
+| `userId`     | String | User's Id for Razorpay _payment creation_.         |
 | `courseId`   | String | The Course ID to which the user is _subscribing_.  |
 | `amount`     | Number | The _amount_ for the Razorpay order.               |
 | `receipt`    | String | _Receipt_ for the Razorpay order.                  |
 | `orderId`    | String | Razorpay Order ID to _Verify Payment_.             |
 | `paymentId`  | String | Razorpay Payment ID to _Verify Payment_.           |
 | `signature`  | String | Razorpay signature to _Verify Payment_.            |
+```

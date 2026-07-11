@@ -148,8 +148,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} theananta. Built with Docusaurus.`,
       },
       prism: {
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
+        theme: prismThemes.oneLight,
+        darkTheme: prismThemes.oceanicNext,
       },
     }),
 };
